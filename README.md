@@ -55,6 +55,7 @@ Initial Startup
 ---------------
 
 Build the needed RPMs with the FPM server
+
     $ vagrant up fpm
     $ vagrant destroy fpm
 
