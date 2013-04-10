@@ -1,0 +1,3 @@
+[submodule "modules/elasticsearch"]
+	path = modules/elasticsearch
+	url = git@github.com:electrical/puppet-elasticsearch.git

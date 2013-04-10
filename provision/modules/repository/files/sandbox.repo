@@ -1,0 +1,5 @@
+[sandbox]
+name=sandbox
+baseurl=http://puppet/
+enabled=1
+gpgcheck=0

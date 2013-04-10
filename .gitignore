@@ -1,0 +1,5 @@
+#nodes.pp
+#modules/*
+.vagrant
+packages/rpm/*
+!packages/rpm/README.md
