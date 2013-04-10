@@ -42,9 +42,9 @@ should be good to clone this repo and go:
     $ vagrant box list
     centos63
     $ git clone git://github.com/paulczar/vagrant-logstash.git
+    $ cd vagrant-logstash/
     $ git submodule init
     $ git submodule update
-    $ cd vagrant-logstash/
 
 
 If you want a CentOS base box to work from, I highly recommend the boxes
@@ -76,7 +76,7 @@ The following tasks will be handled automatically:
    directory) by utilizing VirtualBox's shared folder feature.
 6. Elasticsearch will be installed on client1 according to the rules set in the nodes.pp
 
-All of this is handled using Vagrant's provisioning capabilities and is
+Most of this is handled using Vagrant's provisioning capabilities and is
 controlled by the manifests under the `provision/` directory. 
 
 If you wish to change the domain name of the VMs (it defaults to
