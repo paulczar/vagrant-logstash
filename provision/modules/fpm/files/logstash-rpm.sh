@@ -7,7 +7,8 @@ VERSION=1.1.9
 LS_DIR=/usr/share/logstash
 
 mkdir -p $LS_DIR
-
+mkdir -p $LS_DIR/tmp
+mkdir -p /var/log/puppet
 cd $LS_DIR
 
 wget https://logstash.objects.dreamhost.com/release/logstash-$VERSION-monolithic.jar
@@ -20,5 +21,5 @@ mv logstash-$VERSION-monolithic.jar logstash.jar
 #sed -i "s|^#JAVAMEM.*$|JAVAMEM=256M|" /etc/init.d/logstash
 
 cd /vagrant/packages/rpm
-fpm -s dir -t rpm -d 'java-1.7.0-openjdk' -n "logstash" -v $VERSION $LS_DIR
+fpm -s dir -t rpm -d 'java-1.7.0-openjdk' -n "logstash" -v $VERSION $LS_DIR /var/log/puppet
 
