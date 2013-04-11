@@ -15,7 +15,14 @@ The following machines are available right now...
 
 When fpm is fired up it will build a bunch of RPM packages (if they don't exist already) to be added to the puppet servers yum repo for local consumption.   This means it can be started and then destroyed as soon as its up.
 
-nodes.pp currently sets up a basic single server elasticsearch VM on client1.   There's a bunch of config vars passed to the elasticsearch puppet module to enable this.    The elasticsearch puppet module is grabbed from [here](https://github.com/electrical/puppet-elasticsearch)
+
+Nodes
+=====
+
+nodes.pp currently sets up a basic single server elasticsearch VM on client1.   There's a bunch of config vars passed to the elasticsearch puppet module to enable this.    The elasticsearch puppet module is grabbed from [here](https://github.com/electrical/puppet-elasticsearch).
+
+have also added basic puppet config to client2.    
+
 
 Requirements
 ============
