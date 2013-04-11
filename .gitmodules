@@ -1,3 +1,6 @@
 [submodule "modules/elasticsearch"]
 	path = modules/elasticsearch
 	url = git@github.com:electrical/puppet-elasticsearch.git
+[submodule "modules/logstash"]
+	path = modules/logstash
+	url = git@github.com:electrical/puppet-logstash.git

@@ -35,6 +35,13 @@ class fpm::centos {
     replace => true,
     source  => 'puppet:///modules/fpm/redis-rpm.sh',
   }
+  exec { 'redis-rpm':
+    command => '/tmp/redis-rpm.sh',
+    creates => '/vagrant/packages/rpm/redis-2.6.11-1.x86_64.rpm',
+    require => Package['fpm'],
+    user => 'root',
+  }
+
   file { 'elasticsearch-rpm.sh':
     ensure  => present,
     path    => '/tmp/elasticsearch-rpm.sh',
@@ -44,10 +51,25 @@ class fpm::centos {
     replace => true,
     source  => 'puppet:///modules/fpm/elasticsearch-rpm.sh',
   }
-
   exec { 'elasticsearch-rpm':
     command => '/tmp/elasticsearch-rpm.sh',
     creates => '/vagrant/packages/rpm/elasticsearch-0.20.5-1.x86_64.rpm',
+    require => Package['fpm'],
+    user => 'root',
+  }
+
+  file { 'logstash-rpm.sh':
+    ensure  => present,
+    path    => '/tmp/logstash-rpm.sh',
+    owner   => vagrant,
+    group   => vagrant,
+    mode    => '0755',
+    replace => true,
+    source  => 'puppet:///modules/fpm/logstash-rpm.sh',
+  }
+  exec { 'logstash-rpm':
+    command => '/tmp/logstash-rpm.sh',
+    creates => '/vagrant/packages/rpm/logstash-1.1.9-1.x86_64.rpm',
     require => Package['fpm'],
     user => 'root',
   }

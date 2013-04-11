@@ -15,3 +15,22 @@ node 'client1' {
    }
  }
 }
+
+node 'client2' {
+  class { 'logstash': 
+    status        => 'disabled',
+  }
+  logstash::input::file { 'syslog':
+    path => ['/var/log/messages'],
+    start_position => 'beginning',
+    type => 'syslog',
+    sincedb_path => '/etc/logstash/agent/sincedb/',
+  }
+#  logstash::output::elasticsearch { 'syslog':
+#    host => 'client1',
+#    type => 'syslog',
+#  }
+  logstash::output::stdout { 'syslog':
+    type => 'syslog',
+  }
+}
