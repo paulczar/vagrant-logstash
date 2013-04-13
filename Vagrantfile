@@ -9,8 +9,9 @@ puppet_nodes = [
   {:hostname => 'fpm',     :ip => '172.16.32.9',  :box => 'centos63'},
   {:hostname => 'puppet',  :ip => '172.16.32.10', :box => 'centos63', :fwdhost => 8140, :fwdguest => 8140, :ram => 512},
   {:hostname => 'elasticsearch',  :ip => '172.16.32.11', :box => 'centos63', :ram => 1024},
-  {:hostname => 'elasticsearch2', :ip => '172.16.32.13', :box => 'centos63', :ram => 1024},
   {:hostname => 'logstash',       :ip => '172.16.32.12', :box => 'centos63', :ram => 512},
+  {:hostname => 'elasticsearch2', :ip => '172.16.32.13', :box => 'centos63', :ram => 1024},
+  {:hostname => 'logstash-twitter',       :ip => '172.16.32.14', :box => 'centos63', :ram => 512},
 ]
 
 Vagrant.configure("2") do |config|
