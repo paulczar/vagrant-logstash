@@ -4,3 +4,18 @@
 [submodule "modules/logstash"]
 	path = modules/logstash
 	url = git@github.com:electrical/puppet-logstash.git
+[submodule "modules/kibana"]
+	path = modules/kibana
+	url = git@github.com:garethr/garethr-kibana.git
+[submodule "modules/git"]
+	path = modules/git
+	url = git@github.com:maestrodev/puppet-git.git
+[submodule "modules/vcsrepo"]
+	path = modules/vcsrepo
+	url = git@github.com:puppetlabs/puppetlabs-vcsrepo.git
+[submodule "modules/bundler"]
+	path = modules/bundler
+	url = git@github.com:puppetlabs-operations/puppet-bundler.git
+[submodule "modules/ruby"]
+	path = modules/ruby
+	url = git@github.com:puppetlabs/puppetlabs-ruby.git

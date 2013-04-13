@@ -1,24 +1,60 @@
-node 'client1' {
+node 'elasticsearch' {
   class { 'elasticsearch':
-   confdir                 => '/opt/elasticsearch/config',
-   config                   => {
-     'node'                 => {
-       'name'               => $::hostname
-     },
+    confdir                 => '/opt/elasticsearch/config',
+    config                   => {
+      'node'                 => {
+        'name'               => $::hostname
+      },
      'index'                => {
-       'number_of_replicas' => '0',
-       'number_of_shards'   => '5'
-     },
-     'network'              => {
+        'number_of_replicas' => '0',
+        'number_of_shards'   => '5'
+      },
+      'network'              => {
        'host'               => $::ipaddress_eth1
-     }
-   }
- }
+      }
+    }
+  }
+
+  package { 'ruby-devel':     ensure => 'present',  }
+  package { 'gcc-c++':     ensure => 'present',  }
+  # puppet-upstart on centos broken ...   dodgy it.
+  exec { kibana-web :
+        cwd        => '/tmp',
+        command    => '/usr/bin/ruby /opt/kibana/kibana-daemon.rb start',
+        #creates    => '/tmp/kibana.pid',
+        require    => File['/opt/kibana/KibanaConfig.rb'],
+  }
+  file { '/opt/kibana/tmp':
+    ensure => link,
+    target => '/tmp',
+  }
+  # now that mess is over with load kibana... try and force dependencies first.
+  class { 'kibana': 
+    require => Package ['ruby-devel', 'gcc-c++', 'git', 'elasticsearch'],
+  }
 }
 
-node 'client2' {
+node 'elasticsearch2' {
+  class { 'elasticsearch':
+    confdir                 => '/opt/elasticsearch/config',
+    config                   => {
+      'node'                 => {
+        'name'               => $::hostname
+      },
+     'index'                => {
+        'number_of_replicas' => '0',
+        'number_of_shards'   => '5'
+      },
+      'network'              => {
+       'host'               => $::ipaddress_eth1
+      }
+    }
+  }
+}
+
+node 'logstash' {
   class { 'logstash': 
-    status        => 'disabled',
+    #status        => 'disabled',
   }
   logstash::input::file { 'syslog':
     path => ['/var/log/messages'],
@@ -26,11 +62,12 @@ node 'client2' {
     type => 'syslog',
     sincedb_path => '/etc/logstash/agent/sincedb/',
   }
-#  logstash::output::elasticsearch { 'syslog':
-#    host => 'client1',
-#    type => 'syslog',
-#  }
-  logstash::output::stdout { 'syslog':
+  logstash::output::elasticsearch { 'syslog':
+    host => 'elasticsearch',
+    bind_host => 'elasticsearch',
     type => 'syslog',
   }
+  #  logstash::output::stdout { 'syslog':
+  #  type => 'syslog',
+  #}
 }

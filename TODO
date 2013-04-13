@@ -1,3 +1,17 @@
 * create these paths as part of rpm
 ** /usr/share/logstash/tmp
-** /var/log/puppet
+** /var/log/logstash
+
+* kibana module is a wee bit wonky.  fix it.
+
+* more modules...
+** add kibana 3 module
+** add redis module
+** add rabbit module 
+
+* fix ?
+** add requires package[git] to kibana to ensure it runs first go.
+
+* install packages -
+** g++
+** ruby-devel

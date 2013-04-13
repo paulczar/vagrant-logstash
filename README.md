@@ -68,7 +68,7 @@ Build the needed RPMs with the FPM server
 
 To bring up the Puppet server and the elasticsearch node environment, issue the following command:
 
-    $ vagrant up puppet client1
+    $ vagrant up puppet elasticsearch
 
 The following tasks will be handled automatically:
 
@@ -82,7 +82,8 @@ The following tasks will be handled automatically:
 5. The master server will utilize the `nodes.pp` file and `modules/` directory
    that exist **outside of the VMs** (in your puppet-sandbox Git working
    directory) by utilizing VirtualBox's shared folder feature.
-6. Elasticsearch will be installed on client1 according to the rules set in the nodes.pp
+6. Elasticsearch and Kibana will be installed according to the rules set in the nodes.pp
+   _Kibana module is a bit wacky ...  may need to run `puppet agent -t` a few times on it._
 
 Most of this is handled using Vagrant's provisioning capabilities and is
 controlled by the manifests under the `provision/` directory. 
@@ -94,12 +95,16 @@ reload the machines:
     $ vim Vagrantfile
     $ vagrant reload
 
+If you edit the Vagrantfile to add/remove hosts running ./make_hosts.sh will parse the nodes.pp file and create a new template for /etc/hosts with all the hostnames.   run `vagrant provision` to catch any changes on already running vms.
+
+
 
 Check Your Handiwork
 --------------------
 
-    $ vagrant ssh client1
-    $ curl localhost:9200
+    $ vagrant ssh elasticsearch
+    $ curl elasticsearch:9200
+    $ curl elasticsearch:5601
 
 
 Package Repositories
